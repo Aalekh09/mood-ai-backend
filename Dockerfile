@@ -1,14 +1,22 @@
-# Use official Java 17 image
-FROM eclipse-temurin:17-jdk
-
-# Set working directory
+# ===============================
+# 1️⃣ Build stage
+# ===============================
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copy jar file
-COPY target/mood-ai-backend-1.0.0.jar app.jar
+COPY pom.xml .
+COPY src ./src
 
-# Expose port (Render injects PORT automatically)
+RUN mvn clean package -DskipTests
+
+# ===============================
+# 2️⃣ Run stage
+# ===============================
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+
+COPY --from=build /app/target/*.jar app.jar
+
 EXPOSE 8080
 
-# Run Spring Boot
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
