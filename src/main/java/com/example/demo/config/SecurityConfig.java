@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // 🔥 REQUIRED for CORS preflight
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/auth/register-admin").permitAll()
+//                        .requestMatchers(HttpMethod.POST, "/api/auth/register-admin").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/chat/anonymous").permitAll()
                         .requestMatchers("/api/chat/**").authenticated()
