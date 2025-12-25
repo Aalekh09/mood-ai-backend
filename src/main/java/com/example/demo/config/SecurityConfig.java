@@ -28,11 +28,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     private final JwtAuthFilter jwtAuthFilter;
 
     @Bean
