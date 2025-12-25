@@ -14,6 +14,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+
+
+    // keep your existing SecurityFilterChain config below
 
 
 import java.util.List;
@@ -22,6 +27,11 @@ import java.util.List;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     private final JwtAuthFilter jwtAuthFilter;
 
